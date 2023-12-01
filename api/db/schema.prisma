@@ -22,6 +22,7 @@ model User {
   avatar              String?
   createdAt           DateTime         @default(now())
   updatedAt           DateTime         @updatedAt
+  role                Role?            @default(USER)
 }
 
 model UserCredential {
@@ -31,4 +32,9 @@ model UserCredential {
   publicKey  Bytes
   transports String?
   counter    BigInt
+}
+
+enum Role {
+  ADMIN
+  USER
 }
