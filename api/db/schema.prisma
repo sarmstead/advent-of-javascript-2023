@@ -41,14 +41,26 @@ enum Role {
 }
 
 model UserStatus {
-  id     Int    @id @default(autoincrement())
-  userId String
-  user   User   @relation(fields: [userId], references: [id])
-  status Status
+  id      Int    @id @default(autoincrement())
+  userId  String
+  user    User   @relation(fields: [userId], references: [id])
+  status  Status
+  eventId String
+  event   Event  @relation(fields: [eventId], references: [id])
 }
 
 enum Status {
   INVITED
   DECLINED
   ACCEPTED
+}
+
+model Event {
+  id           String       @id @default(uuid())
+  name         String
+  date         DateTime
+  sendReminder Boolean      @default(false)
+  userStatus   UserStatus[]
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
 }
