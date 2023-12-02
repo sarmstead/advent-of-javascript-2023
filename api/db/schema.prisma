@@ -26,6 +26,7 @@ model User {
   status              UserStatus[]
   santa               Pairing[]        @relation(name: "Pairing_Santa")
   person              Pairing[]        @relation(name: "Pairing_Person")
+  wishList            WishList[]
 }
 
 model UserCredential {
@@ -64,6 +65,7 @@ model Event {
   sendReminder Boolean      @default(false)
   userStatus   UserStatus[]
   pairing      Pairing[]
+  wishList     WishList[]
   createdAt    DateTime     @default(now())
   updatedAt    DateTime     @updatedAt
 }
@@ -78,4 +80,20 @@ model Pairing {
   person    User     @relation(fields: [personId], references: [id], name: "Pairing_Person")
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model WishList {
+  id              Int      @id @default(autoincrement())
+  name            String
+  url             String
+  userId          String
+  user            User     @relation(fields: [userId], references: [id])
+  order           Int?
+  eventId         String
+  event           Event    @relation(fields: [eventId], references: [id])
+  siteImage       String?
+  siteTitle       String?
+  siteDescription String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
 }
