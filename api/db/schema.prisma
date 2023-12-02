@@ -23,6 +23,7 @@ model User {
   createdAt           DateTime         @default(now())
   updatedAt           DateTime         @updatedAt
   role                Role?            @default(USER)
+  status              UserStatus[]
 }
 
 model UserCredential {
@@ -37,4 +38,17 @@ model UserCredential {
 enum Role {
   ADMIN
   USER
+}
+
+model UserStatus {
+  id     Int    @id @default(autoincrement())
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+  status Status
+}
+
+enum Status {
+  INVITED
+  DECLINED
+  ACCEPTED
 }
