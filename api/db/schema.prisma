@@ -14,7 +14,7 @@ model User {
   hashedPassword      String
   salt                String
   resetToken          String?
-  resetTokenExpiresAt String?
+  resetTokenExpiresAt DateTime?
   webAuthnChallenge   String?          @unique
   credentials         UserCredential[]
   firstName           String?
