@@ -57,7 +57,7 @@ const SignupPage = () => {
         <div>
           <div>
             <header>
-              <h2>Login</h2>
+              <h2>Sign Up</h2>
             </header>
 
             <div>
