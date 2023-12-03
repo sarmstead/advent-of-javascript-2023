@@ -4,6 +4,7 @@ import { DbAuthHandler, DbAuthHandlerOptions } from '@redwoodjs/auth-dbauth-api'
 
 import { cookieName } from 'src/lib/auth'
 import { db } from 'src/lib/db'
+import { sendEmail } from 'src/lib/email'
 
 export const handler = async (
   event: APIGatewayProxyEvent,
@@ -23,6 +24,15 @@ export const handler = async (
     // address in a toast message so the user will know it worked and where
     // to look for the email.
     handler: (user) => {
+      const url = `${process.env.SITE_URL}/reset-password?resetToken=${user.resetToken}`
+      const text = `Hi, ${user.firstName}! Here's your password reset link: ${url}. Email Santa's elves if you have any questions. Thanks!`
+      const html = `<p>Hi, ${user.firstName}!</p><p>Here's your password reset link: ${url}.</p><p>Email Santa's elves if you have any questions. Thanks!</p>`
+      sendEmail({
+        to: user.email,
+        subject: 'Your Password Reset 🔑',
+        text,
+        html,
+      })
       return user
     },
 
