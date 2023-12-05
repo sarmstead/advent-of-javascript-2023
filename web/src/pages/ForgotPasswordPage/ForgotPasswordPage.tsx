@@ -6,6 +6,8 @@ import { MetaTags } from '@redwoodjs/web'
 import { toast, Toaster } from '@redwoodjs/web/toast'
 
 import { useAuth } from 'src/auth'
+import HeaderWithRulers from 'src/components/HeaderWithRulers/HeaderWithRulers'
+import AuthLayout from 'src/layouts/AuthLayout/AuthLayout'
 
 const ForgotPasswordPage = () => {
   const { isAuthenticated, forgotPassword } = useAuth()
@@ -41,43 +43,37 @@ const ForgotPasswordPage = () => {
     <>
       <MetaTags title="Forgot Password" />
 
-      <main>
+      <AuthLayout>
         <Toaster toastOptions={{ className: 'rw-toast', duration: 6000 }} />
         <div>
           <div>
-            <header>
-              <h2>Forgot Password</h2>
-            </header>
+            <HeaderWithRulers
+              className="mb-8 text-white"
+              heading="forgot password"
+            />
+            <Form onSubmit={onSubmit} className="m-auto max-w-[661px]">
+              <TextField
+                name="username"
+                placeholder="username"
+                className="auth mb-4"
+                ref={usernameRef}
+                validation={{
+                  required: {
+                    value: true,
+                    message: 'Username is required',
+                  },
+                }}
+              />
 
-            <div>
+              <FieldError name="username" className="rw-field-error" />
+
               <div>
-                <Form onSubmit={onSubmit}>
-                  <div>
-                    <TextField
-                      name="username"
-                      placeholder="username"
-                      errorClassName="rw-input rw-input-error"
-                      ref={usernameRef}
-                      validation={{
-                        required: {
-                          value: true,
-                          message: 'Username is required',
-                        },
-                      }}
-                    />
-
-                    <FieldError name="username" className="rw-field-error" />
-                  </div>
-
-                  <div>
-                    <Submit>Submit</Submit>
-                  </div>
-                </Form>
+                <Submit>Submit</Submit>
               </div>
-            </div>
+            </Form>
           </div>
         </div>
-      </main>
+      </AuthLayout>
     </>
   )
 }

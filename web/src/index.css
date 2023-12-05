@@ -79,7 +79,7 @@
   }
 
   button[type="submit"] {
-    @apply bg-supernova font-handwriting uppercase text-3xl text-black w-full rounded-full py-5;
+    @apply bg-supernova font-handwriting uppercase text-3xl text-black w-full rounded-full pt-5 pb-3;
   }
 
   button.medium,

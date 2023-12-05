@@ -1,7 +1,7 @@
 const HeaderWithRulers = ({ className, heading }) => {
   return (
     <div
-      className={`with-rulers font-condensed text-7xl uppercase ${className}`}
+      className={`with-rulers text-center font-condensed text-7xl uppercase ${className}`}
     >
       {heading}
     </div>
