@@ -129,17 +129,22 @@ const LoginPage = ({ type }) => {
   }
 
   const RegisterWebAuthnPrompt = () => (
-    <div className="rw-webauthn-wrapper">
-      <h2>No more Passwords!</h2>
-      <p>
-        Depending on your device you can log in with your fingerprint, face or
+    <div className="m-auto max-w-[661px] text-center text-white">
+      <h2 className="mb-3 text-2xl font-bold">
+        Passwords are on Santa&apos;s naughty list 🎅🏽
+      </h2>
+      <p className="mb-6">
+        Depending on your device, you can log in with your fingerprint, face or
         PIN next time.
       </p>
-      <div className="rw-button-group">
-        <button className="rw-button rw-button-blue" onClick={onRegister}>
+      <div className="flex flex-col items-center gap-2">
+        <button
+          className="max-w-fit rounded-full bg-supernova px-8 pb-2 pt-4 font-handwriting text-2xl uppercase text-black"
+          onClick={onRegister}
+        >
           Turn On
         </button>
-        <button className="rw-button" onClick={onSkip}>
+        <button className="underline" onClick={onSkip}>
           Skip for now
         </button>
       </div>
