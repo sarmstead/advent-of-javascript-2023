@@ -13,6 +13,8 @@ import { MetaTags } from '@redwoodjs/web'
 import { toast, Toaster } from '@redwoodjs/web/toast'
 
 import { useAuth } from 'src/auth'
+import HeaderWithRulers from 'src/components/HeaderWithRulers/HeaderWithRulers'
+import AuthLayout from 'src/layouts/AuthLayout/AuthLayout'
 
 const WELCOME_MESSAGE = 'Welcome back!'
 const REDIRECT = routes.home()
@@ -47,7 +49,9 @@ const LoginPage = ({ type }) => {
   // focus on the username field as soon as the page loads
   const usernameRef = useRef()
   useEffect(() => {
-    usernameRef.current && usernameRef.current.focus()
+    if (usernameRef.current) {
+      usernameRef.current && (usernameRef.current as HTMLInputElement).focus()
+    }
   }, [])
 
   const onSubmit = async (data) => {
@@ -143,13 +147,12 @@ const LoginPage = ({ type }) => {
   )
 
   const PasswordForm = () => (
-    <Form onSubmit={onSubmit}>
+    <Form onSubmit={onSubmit} className="m-auto max-w-[661px]">
       <TextField
         name="username"
-        errorClassName="rw-input rw-input-error"
+        className="auth mb-4"
         ref={usernameRef}
         placeholder="username"
-        autoFocus
         validation={{
           required: {
             value: true,
@@ -158,12 +161,12 @@ const LoginPage = ({ type }) => {
         }}
       />
 
-      <FieldError name="username" className="rw-field-error" />
+      <FieldError name="username" />
 
       <PasswordField
         name="password"
         placeholder="password"
-        errorClassName="rw-input rw-input-error"
+        className="auth mb-4"
         autoComplete="current-password"
         validation={{
           required: {
@@ -173,15 +176,13 @@ const LoginPage = ({ type }) => {
         }}
       />
 
-      <div>
-        <Link to={routes.signup()}>Need an Account?</Link>
-      </div>
-
       <FieldError name="password" className="rw-field-error" />
 
-      <div>
+      <div className="mb-3.5">
         <Submit>Submit</Submit>
       </div>
+
+      {linkToRender()}
     </Form>
   )
 
@@ -201,9 +202,9 @@ const LoginPage = ({ type }) => {
     if (showWebAuthn) {
       if (webAuthn.isEnabled()) {
         return (
-          <div className="rw-login-link">
-            <span>or login with </span>{' '}
-            <a href="?type=password" className="rw-link">
+          <div className="flex justify-center gap-1 dark:text-white">
+            <span>Login with </span>
+            <a href="?type=password" className="underline">
               username and password
             </a>
           </div>
@@ -211,10 +212,12 @@ const LoginPage = ({ type }) => {
       }
     } else {
       return (
-        <div>
-          <span>Don&apos;t have an account?</span>{' '}
-          <Link to={routes.signup()} className="rw-link">
-            Sign up!
+        <div className="flex">
+          <Link
+            to={routes.signup()}
+            className="w-full text-center underline dark:text-white"
+          >
+            Need an Account?
           </Link>
         </div>
       )
@@ -228,22 +231,11 @@ const LoginPage = ({ type }) => {
   return (
     <>
       <MetaTags title="Login" />
-
-      <main className="rw-main">
+      <AuthLayout>
         <Toaster toastOptions={{ className: 'rw-toast', duration: 6000 }} />
-        <div className="rw-scaffold rw-login-container">
-          <div className="rw-segment">
-            <header className="rw-segment-header">
-              <h2 className="rw-heading rw-heading-secondary">Login</h2>
-            </header>
-
-            <div className="rw-segment-main">
-              <div className="rw-form-wrapper">{formToRender()}</div>
-            </div>
-          </div>
-          {linkToRender()}
-        </div>
-      </main>
+        <HeaderWithRulers heading="Login" className="mb-8 text-white" />
+        {formToRender()}
+      </AuthLayout>
     </>
   )
 }

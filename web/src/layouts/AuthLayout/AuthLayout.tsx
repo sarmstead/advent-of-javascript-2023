@@ -7,7 +7,7 @@ type AuthLayoutProps = {
 const AuthLayout = ({ children }: AuthLayoutProps) => {
   return (
     <>
-      <main className="bg-auth">
+      <main className="bg-auth p-7 lg:p-0">
         <img
           src="/images/logo__secret-santa.svg"
           alt="Secret Santa"

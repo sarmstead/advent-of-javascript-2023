@@ -94,17 +94,25 @@
   }
 
   main {
-    @apply z-10 overflow-scroll relative mb-[350px];
+    @apply z-10 relative mb-[350px];
   }
 
   svg {
     @apply fill-current
   }
+
+  input.auth, input.auth::placeholder {
+    @apply font-handwriting;
+  }
+
+  input.auth::placeholder {
+    @apply uppercase;
+  }
 }
 
 @layer components {
   .bg-auth {
-    @apply min-h-screen w-screen bg-silverTree dark:bg-nileBlue bg-[center_top] bg-no-repeat bg-[length:1440px_auto] min-[1440px]:bg-[length:100%_auto];
+    @apply min-h-screen bg-silverTree dark:bg-nileBlue bg-[center_top] bg-no-repeat bg-[length:1440px_auto] min-[1440px]:bg-[length:100%_auto];
   }
 
   .bg-interior {
