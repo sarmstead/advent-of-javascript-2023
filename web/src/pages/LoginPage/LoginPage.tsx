@@ -149,7 +149,7 @@ const LoginPage = ({ type }) => {
         >
           Turn On
         </button>
-        <button className="underline" onClick={onSkip}>
+        <button className="underline hover:no-underline" onClick={onSkip}>
           Skip for now
         </button>
       </div>
@@ -214,7 +214,7 @@ const LoginPage = ({ type }) => {
         return (
           <div className="flex justify-center gap-1 dark:text-white">
             <span>Login with </span>
-            <a href="?type=password" className="underline">
+            <a href="?type=password" className="underline hover:no-underline">
               username and password
             </a>
           </div>
@@ -225,7 +225,7 @@ const LoginPage = ({ type }) => {
         <div className="flex">
           <Link
             to={routes.signup()}
-            className="w-full text-center underline dark:text-white"
+            className="w-full text-center underline hover:no-underline dark:text-white"
           >
             Need an Account?
           </Link>

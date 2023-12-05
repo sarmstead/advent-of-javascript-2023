@@ -109,7 +109,7 @@ const SignupPage = () => {
         <div className="flex">
           <Link
             to={routes.login()}
-            className="w-full text-center underline dark:text-white"
+            className="w-full text-center underline hover:no-underline dark:text-white"
           >
             Ready to Login?
           </Link>
