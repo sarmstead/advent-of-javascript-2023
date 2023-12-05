@@ -65,7 +65,7 @@ const ForgotPasswordPage = () => {
                 }}
               />
 
-              <FieldError name="username" className="rw-field-error" />
+              <FieldError name="username" />
 
               <div>
                 <Submit>Submit</Submit>
