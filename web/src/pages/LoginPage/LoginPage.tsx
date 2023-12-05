@@ -116,11 +116,16 @@ const LoginPage = ({ type }) => {
 
   const AuthWebAuthnPrompt = () => {
     return (
-      <div className="rw-webauthn-wrapper">
-        <h2>WebAuthn Login Enabled</h2>
-        <p>Log in with your fingerprint, face or PIN</p>
-        <div className="rw-button-group">
-          <button className="rw-button rw-button-blue" onClick={onAuthenticate}>
+      <div className="m-auto max-w-[661px] text-center text-white">
+        <h2 className="mb-3 text-2xl font-bold">
+          Ho, Ho, Ho! You&apos;re passwordless!
+        </h2>
+        <p className="mb-6">Log in with your fingerprint, face or PIN</p>
+        <div>
+          <button
+            className="max-w-fit rounded-full bg-supernova px-8 pb-2 pt-4 font-handwriting text-2xl uppercase tracking-tighter text-black"
+            onClick={onAuthenticate}
+          >
             Open Authenticator
           </button>
         </div>
@@ -139,7 +144,7 @@ const LoginPage = ({ type }) => {
       </p>
       <div className="flex flex-col items-center gap-2">
         <button
-          className="max-w-fit rounded-full bg-supernova px-8 pb-2 pt-4 font-handwriting text-2xl uppercase text-black"
+          className="max-w-fit rounded-full bg-supernova px-8 pb-2 pt-4 font-handwriting text-2xl uppercase tracking-tighter text-black"
           onClick={onRegister}
         >
           Turn On
