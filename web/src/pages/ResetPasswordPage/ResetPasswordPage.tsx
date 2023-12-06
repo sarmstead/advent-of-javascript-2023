@@ -6,6 +6,8 @@ import { MetaTags } from '@redwoodjs/web'
 import { toast, Toaster } from '@redwoodjs/web/toast'
 
 import { useAuth } from 'src/auth'
+import HeaderWithRulers from 'src/components/HeaderWithRulers/HeaderWithRulers'
+import AuthLayout from 'src/layouts/AuthLayout/AuthLayout'
 
 const ResetPasswordPage = ({ resetToken }: { resetToken: string }) => {
   const { isAuthenticated, reauthenticate, validateResetToken, resetPassword } =
@@ -55,45 +57,37 @@ const ResetPasswordPage = ({ resetToken }: { resetToken: string }) => {
     <>
       <MetaTags title="Reset Password" />
 
-      <main>
+      <AuthLayout>
         <Toaster toastOptions={{ className: 'rw-toast', duration: 6000 }} />
-        <div>
+
+        <HeaderWithRulers
+          className="mb-8 text-white"
+          heading="reset password"
+        />
+
+        <Form onSubmit={onSubmit} className="m-auto max-w-[661px]">
+          <PasswordField
+            name="password"
+            placeholder="new password"
+            autoComplete="new-password"
+            className="auth mb-4"
+            disabled={!enabled}
+            ref={passwordRef}
+            validation={{
+              required: {
+                value: true,
+                message: 'New Password is required',
+              },
+            }}
+          />
+
+          <FieldError name="password" />
+
           <div>
-            <header>
-              <h2>Reset Password</h2>
-            </header>
-
-            <div>
-              <div>
-                <Form onSubmit={onSubmit}>
-                  <div>
-                    <PasswordField
-                      name="password"
-                      placeholder="new password"
-                      autoComplete="new-password"
-                      errorClassName="rw-input rw-input-error"
-                      disabled={!enabled}
-                      ref={passwordRef}
-                      validation={{
-                        required: {
-                          value: true,
-                          message: 'New Password is required',
-                        },
-                      }}
-                    />
-
-                    <FieldError name="password" className="rw-field-error" />
-                  </div>
-
-                  <div>
-                    <Submit disabled={!enabled}>Submit</Submit>
-                  </div>
-                </Form>
-              </div>
-            </div>
+            <Submit disabled={!enabled}>Submit</Submit>
           </div>
-        </div>
-      </main>
+        </Form>
+      </AuthLayout>
     </>
   )
 }

@@ -3,7 +3,6 @@ import { useEffect } from 'react'
 
 import {
   Form,
-  Label,
   TextField,
   PasswordField,
   FieldError,
@@ -14,6 +13,8 @@ import { MetaTags } from '@redwoodjs/web'
 import { toast, Toaster } from '@redwoodjs/web/toast'
 
 import { useAuth } from 'src/auth'
+import HeaderWithRulers from 'src/components/HeaderWithRulers/HeaderWithRulers'
+import AuthLayout from 'src/layouts/AuthLayout/AuthLayout'
 
 const SignupPage = () => {
   const { isAuthenticated, signUp } = useAuth()
@@ -52,73 +53,68 @@ const SignupPage = () => {
     <>
       <MetaTags title="Signup" />
 
-      <main>
+      <AuthLayout>
         <Toaster toastOptions={{ className: 'rw-toast', duration: 6000 }} />
-        <div>
-          <div>
-            <header>
-              <h2>Sign Up</h2>
-            </header>
 
-            <div>
-              <div>
-                <Form onSubmit={onSubmit}>
-                  <TextField
-                    name="firstName"
-                    ref={firstNameRef}
-                    errorClassName="rw-input rw-input-error"
-                    placeholder="first name"
-                  />
-                  <FieldError name="firstName" className="rw-field-error" />
+        <HeaderWithRulers className="pb-8 text-white" heading="Sign Up" />
 
-                  <TextField
-                    name="lastName"
-                    errorClassName="rw-input rw-input-error"
-                    placeholder="last name"
-                  />
-                  <FieldError name="lastName" className="rw-field-error" />
+        <Form onSubmit={onSubmit} className="m-auto max-w-[661px]">
+          <TextField
+            name="firstName"
+            ref={firstNameRef}
+            className="auth mb-4"
+            placeholder="first name"
+          />
+          <FieldError name="firstName" className="rw-field-error" />
 
-                  <TextField
-                    name="username"
-                    errorClassName="rw-input rw-input-error"
-                    placeholder="username"
-                    validation={{
-                      required: {
-                        value: true,
-                        message: 'Username is required',
-                      },
-                    }}
-                  />
-                  <FieldError name="username" className="rw-field-error" />
+          <TextField
+            name="lastName"
+            className="auth mb-4"
+            placeholder="last name"
+          />
+          <FieldError name="lastName" className="rw-field-error" />
 
-                  <PasswordField
-                    name="password"
-                    errorClassName="rw-input rw-input-error"
-                    placeholder="password"
-                    autoComplete="current-password"
-                    validation={{
-                      required: {
-                        value: true,
-                        message: 'Password is required',
-                      },
-                    }}
-                  />
-                  <FieldError name="password" />
+          <TextField
+            name="username"
+            className="auth mb-4"
+            placeholder="username"
+            validation={{
+              required: {
+                value: true,
+                message: 'Username is required',
+              },
+            }}
+          />
+          <FieldError name="username" className="rw-field-error" />
 
-                  <div>
-                    <Submit>Sign Up</Submit>
-                  </div>
-                </Form>
-              </div>
-            </div>
+          <PasswordField
+            name="password"
+            className="auth mb-4"
+            placeholder="password"
+            autoComplete="current-password"
+            validation={{
+              required: {
+                value: true,
+                message: 'Password is required',
+              },
+            }}
+          />
+          <FieldError name="password" />
+
+          <div className="mb-3.5">
+            <Submit>Sign Up</Submit>
           </div>
-          <div>
-            <Link to={routes.login()} className="rw-link">
-              Ready to Login?
-            </Link>
-          </div>
+        </Form>
+
+        <div className="flex">
+          <Link
+            to={routes.login()}
+            className="w-full text-center underline hover:no-underline dark:text-white"
+          >
+            Ready to Login?
+          </Link>
         </div>
-      </main>
+      </AuthLayout>
     </>
   )
 }

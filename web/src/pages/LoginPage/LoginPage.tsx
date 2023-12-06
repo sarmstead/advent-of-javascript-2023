@@ -13,6 +13,8 @@ import { MetaTags } from '@redwoodjs/web'
 import { toast, Toaster } from '@redwoodjs/web/toast'
 
 import { useAuth } from 'src/auth'
+import HeaderWithRulers from 'src/components/HeaderWithRulers/HeaderWithRulers'
+import AuthLayout from 'src/layouts/AuthLayout/AuthLayout'
 
 const WELCOME_MESSAGE = 'Welcome back!'
 const REDIRECT = routes.home()
@@ -47,7 +49,9 @@ const LoginPage = ({ type }) => {
   // focus on the username field as soon as the page loads
   const usernameRef = useRef()
   useEffect(() => {
-    usernameRef.current && usernameRef.current.focus()
+    if (usernameRef.current) {
+      usernameRef.current && (usernameRef.current as HTMLInputElement).focus()
+    }
   }, [])
 
   const onSubmit = async (data) => {
@@ -112,11 +116,16 @@ const LoginPage = ({ type }) => {
 
   const AuthWebAuthnPrompt = () => {
     return (
-      <div className="rw-webauthn-wrapper">
-        <h2>WebAuthn Login Enabled</h2>
-        <p>Log in with your fingerprint, face or PIN</p>
-        <div className="rw-button-group">
-          <button className="rw-button rw-button-blue" onClick={onAuthenticate}>
+      <div className="m-auto max-w-[661px] text-center text-white">
+        <h2 className="mb-3 text-2xl font-bold">
+          Ho, Ho, Ho! You&apos;re passwordless!
+        </h2>
+        <p className="mb-6">Log in with your fingerprint, face or PIN</p>
+        <div>
+          <button
+            className="max-w-fit rounded-full bg-supernova px-8 pb-2 pt-4 font-handwriting text-2xl uppercase tracking-tighter text-black"
+            onClick={onAuthenticate}
+          >
             Open Authenticator
           </button>
         </div>
@@ -125,17 +134,22 @@ const LoginPage = ({ type }) => {
   }
 
   const RegisterWebAuthnPrompt = () => (
-    <div className="rw-webauthn-wrapper">
-      <h2>No more Passwords!</h2>
-      <p>
-        Depending on your device you can log in with your fingerprint, face or
+    <div className="m-auto max-w-[661px] text-center text-white">
+      <h2 className="mb-3 text-2xl font-bold">
+        Passwords are on Santa&apos;s naughty list 🎅🏽
+      </h2>
+      <p className="mb-6">
+        Depending on your device, you can log in with your fingerprint, face or
         PIN next time.
       </p>
-      <div className="rw-button-group">
-        <button className="rw-button rw-button-blue" onClick={onRegister}>
+      <div className="flex flex-col items-center gap-2">
+        <button
+          className="max-w-fit rounded-full bg-supernova px-8 pb-2 pt-4 font-handwriting text-2xl uppercase tracking-tighter text-black"
+          onClick={onRegister}
+        >
           Turn On
         </button>
-        <button className="rw-button" onClick={onSkip}>
+        <button className="underline hover:no-underline" onClick={onSkip}>
           Skip for now
         </button>
       </div>
@@ -143,13 +157,12 @@ const LoginPage = ({ type }) => {
   )
 
   const PasswordForm = () => (
-    <Form onSubmit={onSubmit}>
+    <Form onSubmit={onSubmit} className="m-auto max-w-[661px]">
       <TextField
         name="username"
-        errorClassName="rw-input rw-input-error"
+        className="auth mb-4"
         ref={usernameRef}
         placeholder="username"
-        autoFocus
         validation={{
           required: {
             value: true,
@@ -158,12 +171,12 @@ const LoginPage = ({ type }) => {
         }}
       />
 
-      <FieldError name="username" className="rw-field-error" />
+      <FieldError name="username" />
 
       <PasswordField
         name="password"
         placeholder="password"
-        errorClassName="rw-input rw-input-error"
+        className="auth mb-4"
         autoComplete="current-password"
         validation={{
           required: {
@@ -173,15 +186,13 @@ const LoginPage = ({ type }) => {
         }}
       />
 
-      <div>
-        <Link to={routes.signup()}>Need an Account?</Link>
-      </div>
-
       <FieldError name="password" className="rw-field-error" />
 
-      <div>
+      <div className="mb-3.5">
         <Submit>Submit</Submit>
       </div>
+
+      {linkToRender()}
     </Form>
   )
 
@@ -201,9 +212,9 @@ const LoginPage = ({ type }) => {
     if (showWebAuthn) {
       if (webAuthn.isEnabled()) {
         return (
-          <div className="rw-login-link">
-            <span>or login with </span>{' '}
-            <a href="?type=password" className="rw-link">
+          <div className="flex justify-center gap-1 dark:text-white">
+            <span>Login with </span>
+            <a href="?type=password" className="underline hover:no-underline">
               username and password
             </a>
           </div>
@@ -211,10 +222,12 @@ const LoginPage = ({ type }) => {
       }
     } else {
       return (
-        <div>
-          <span>Don&apos;t have an account?</span>{' '}
-          <Link to={routes.signup()} className="rw-link">
-            Sign up!
+        <div className="flex">
+          <Link
+            to={routes.signup()}
+            className="w-full text-center underline hover:no-underline dark:text-white"
+          >
+            Need an Account?
           </Link>
         </div>
       )
@@ -228,22 +241,11 @@ const LoginPage = ({ type }) => {
   return (
     <>
       <MetaTags title="Login" />
-
-      <main className="rw-main">
+      <AuthLayout>
         <Toaster toastOptions={{ className: 'rw-toast', duration: 6000 }} />
-        <div className="rw-scaffold rw-login-container">
-          <div className="rw-segment">
-            <header className="rw-segment-header">
-              <h2 className="rw-heading rw-heading-secondary">Login</h2>
-            </header>
-
-            <div className="rw-segment-main">
-              <div className="rw-form-wrapper">{formToRender()}</div>
-            </div>
-          </div>
-          {linkToRender()}
-        </div>
-      </main>
+        <HeaderWithRulers heading="Login" className="mb-8 text-white" />
+        {formToRender()}
+      </AuthLayout>
     </>
   )
 }
