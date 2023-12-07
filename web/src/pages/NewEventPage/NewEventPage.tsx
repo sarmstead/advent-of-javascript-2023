@@ -15,11 +15,11 @@ import AuthLayout from 'src/layouts/AuthLayout/AuthLayout'
 const NewEventPage = () => {
   return (
     <>
-      <MetaTags title="NewEvent" description="NewEvent page" />
+      <MetaTags title="Create a New Event" />
       <AuthLayout>
         <HeaderWithRulers
           className="mb-8 text-white"
-          heading="set up your group"
+          heading="set up your event"
         />
         <Form className="m-auto flex max-w-[661px] flex-col gap-4">
           <Label
