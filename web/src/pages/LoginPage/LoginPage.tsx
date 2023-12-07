@@ -17,7 +17,7 @@ import HeaderWithRulers from 'src/components/HeaderWithRulers/HeaderWithRulers'
 import AuthLayout from 'src/layouts/AuthLayout/AuthLayout'
 
 const WELCOME_MESSAGE = 'Welcome back!'
-const REDIRECT = routes.home()
+const REDIRECT = routes.dashboard()
 
 const LoginPage = ({ type }) => {
   const {
