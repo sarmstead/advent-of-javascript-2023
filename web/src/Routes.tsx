@@ -15,6 +15,7 @@ const Routes = () => {
   return (
     <Router useAuth={useAuth}>
       <PrivateSet unauthenticated="login">
+        <Route path="/event/new" page={NewEventPage} name="newEvent" />
         <Route path="/dashboard" page={DashboardPage} name="dashboard" />
       </PrivateSet>
       <Route path="/" page={HomePage} name="home" />
