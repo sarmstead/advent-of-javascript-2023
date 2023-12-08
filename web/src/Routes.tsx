@@ -16,6 +16,7 @@ const Routes = () => {
     <Router useAuth={useAuth}>
       <PrivateSet unauthenticated="login">
         <Route path="/event/new" page={NewEventPage} name="newEvent" />
+        <Route path="/event/invite" page={EventInvitePage} name="eventInvite" />
         <Route path="/dashboard" page={DashboardPage} name="dashboard" />
       </PrivateSet>
       <Route path="/" page={HomePage} name="home" />

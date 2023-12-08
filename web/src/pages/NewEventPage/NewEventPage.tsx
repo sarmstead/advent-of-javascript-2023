@@ -6,6 +6,7 @@ import {
   TextField,
   Submit,
 } from '@redwoodjs/forms'
+import { navigate, routes } from '@redwoodjs/router'
 import { MetaTags, useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
@@ -29,7 +30,10 @@ const CREATE_EVENT_MUTATION = gql`
 
 const NewEventPage = () => {
   const [createEvent, { loading }] = useMutation(CREATE_EVENT_MUTATION, {
-    onSuccess: () => toast.success('Event created!'),
+    onCompleted: () => {
+      toast.success('Event created!')
+      navigate(routes.eventInvite())
+    },
     onError: (error) => {
       console.error({ error })
       toast.error(error.message)
