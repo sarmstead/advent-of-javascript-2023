@@ -3,7 +3,7 @@ import { useEffect, useRef } from 'react'
 import { Form, TextField, Submit, FieldError } from '@redwoodjs/forms'
 import { navigate, routes } from '@redwoodjs/router'
 import { MetaTags } from '@redwoodjs/web'
-import { toast, Toaster } from '@redwoodjs/web/toast'
+import { toast } from '@redwoodjs/web/toast'
 
 import { useAuth } from 'src/auth'
 import HeaderWithRulers from 'src/components/HeaderWithRulers/HeaderWithRulers'
@@ -14,7 +14,7 @@ const ForgotPasswordPage = () => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      navigate(routes.home())
+      navigate(routes.dashboard())
     }
   }, [isAuthenticated])
 
@@ -44,7 +44,6 @@ const ForgotPasswordPage = () => {
       <MetaTags title="Forgot Password" />
 
       <AuthLayout>
-        <Toaster toastOptions={{ className: 'rw-toast', duration: 6000 }} />
         <div>
           <div>
             <HeaderWithRulers
