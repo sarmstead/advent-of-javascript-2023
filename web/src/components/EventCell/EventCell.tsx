@@ -84,12 +84,6 @@ export const Success = ({
   return (
     <section>
       <span className="font-handwriting text-2xl uppercase tracking-tighter dark:text-white">
-        {/* {roundedWeeksRemaining < 1
-          ? ''
-          : `${roundedWeeksRemaining} ${weekOrWeeks}`}
-        {roundedWeeksRemaining >= 1 && daysRemaining >= 1 ? ' & ' : ''}
-        {daysRemaining < 1 ? '' : `${daysRemaining} ${daysOrDays}`}
-        &nbsp;until */}
         {message}
       </span>
       <h1 className="font-condensed text-5xl uppercase dark:text-white md:text-7xl lg:text-9xl">
