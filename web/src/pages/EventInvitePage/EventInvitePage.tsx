@@ -1,14 +1,16 @@
 import { MetaTags } from '@redwoodjs/web'
 
+import EventCell from 'src/components/EventCell/EventCell'
 import InteriorLayout from 'src/layouts/InteriorLayout/InteriorLayout'
 
 const EventInvitePage = ({ id }) => {
-  console.log({ id })
   return (
     <>
       <MetaTags title="EventInvite" description="EventInvite page" />
 
-      <InteriorLayout></InteriorLayout>
+      <InteriorLayout>
+        <EventCell id={id} />
+      </InteriorLayout>
     </>
   )
 }
